@@ -1,0 +1,209 @@
+
+:root {
+  --coffee-dark: #4a2c2a;
+  --coffee-brown: #8d5b4c;
+  --coffee-light: #d2b48c;
+  --coffee-cream: #f5f5dc;
+  --background: #f9f6f2;
+  --text-color: #3e3e3e;
+  --border-color: #e0d8cc;
+  --shadow-color: rgba(74, 44, 42, 0.1);
+  --accent-color: #e76f51;
+  --font-family: 'Poppins', sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  background-color: var(--background);
+  color: var(--text-color);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.app-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.title {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--coffee-dark);
+  margin-bottom: 30px;
+  letter-spacing: -1px;
+}
+
+.main-content {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.settings-card, .wheel-display {
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 8px 30px var(--shadow-color);
+  height: fit-content;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: var(--coffee-brown);
+  text-align: left;
+}
+
+.input, .number-input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  font-family: var(--font-family);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input:focus, .number-input:focus {
+  outline: none;
+  border-color: var(--coffee-brown);
+  box-shadow: 0 0 0 4px rgba(141, 91, 76, 0.2);
+}
+
+.names-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.button {
+  width: 100%;
+  padding: 15px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: white;
+  background: var(--accent-color);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.button:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(231, 111, 81, 0.4);
+}
+
+.button:disabled {
+  background-color: var(--border-color);
+  color: var(--coffee-brown);
+  cursor: not-allowed;
+}
+
+.wheel-display {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.wheel-pointer {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 18px solid transparent;
+  border-right: 18px solid transparent;
+  border-top: 30px solid var(--accent-color);
+  z-index: 10;
+  filter: drop-shadow(0 4px 5px rgba(0,0,0,0.2));
+}
+
+.wheel-svg {
+  transition: transform 4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.winner-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  backdrop-filter: blur(5px);
+  animation: fadeIn 0.5s ease;
+}
+
+.winner-card {
+  background: #fff;
+  padding: 40px 50px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+  transform: scale(0.8);
+  animation: popIn 0.5s 0.2s ease-out forwards;
+}
+
+.winner-title {
+  font-size: 1.5rem;
+  color: var(--coffee-brown);
+  margin: 0 0 10px 0;
+}
+
+.winner-name {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  margin: 0 0 20px 0;
+  line-height: 1.2;
+}
+
+.confetti-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes popIn { 
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); } 
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .main-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .title {
+    font-size: 2.2rem;
+  }
+  .wheel-display {
+    min-height: 350px;
+  }
+}
